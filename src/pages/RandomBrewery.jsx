@@ -6,8 +6,12 @@ function RandomBreweryPage() {
   useEffect(() => {
     fetch(`https://api.openbrewerydb.org/v1/breweries/random`)
       .then((response) => response.json())
-      .then((data) => setRandomBrewery(data))
+      .then((data) => {
+        setRandomBrewery(data);
+      })
+
       .catch((err) => console.log(err));
+    console.log(randomBrewery);
   }, []);
 
   if (!randomBrewery.name) {
@@ -16,10 +20,10 @@ function RandomBreweryPage() {
 
   return (
     <div>
-      <h2>{randomBrewery.name}</h2>
-      <p>Type: {randomBrewery.brewery_type}</p>
-      <p>Country: {randomBrewery.country}</p>
-      <p>website: {randomBrewery.website_url}</p>
+      <h2>{randomBrewery[0].name}</h2>
+      <p>Type: {randomBrewery[0].brewery_type}</p>
+      <p>Country: {randomBrewery[0].country}</p>
+      <p>website: {randomBrewery[0].website_url}</p>
     </div>
   );
 }
